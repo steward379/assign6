@@ -33,12 +33,12 @@ class Fighter {
 
   void shoot() {
     if (bullets[limit] == null) {
-        bullets[limit] = new Bullet(fighter.x - 30, fighter.y + 15);   
-        limit ++;
-      }
-      if ( limit > 4) {
-        limit = 0;
-      }
+      bullets[limit] = new Bullet(fighter.x - 30, fighter.y + 15);   
+      limit ++;
+    }
+    if ( limit > 4) {
+      limit = 0;
+    }
   }
 
   void move(int direct) {
@@ -78,5 +78,4 @@ class Fighter {
     }
     return;
   }
-  
 }
