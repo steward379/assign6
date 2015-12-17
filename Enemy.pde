@@ -112,4 +112,3 @@ void addEnemyStrong()
   }
   isBoss = true;
 }
-
