@@ -44,7 +44,7 @@ boolean isMovingLeft;
 boolean isMovingRight;
 
 int time;
-int wait =5200;
+int wait =6000;
 int limit = 0;
 
 void setup () {
