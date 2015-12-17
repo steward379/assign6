@@ -20,7 +20,6 @@ public class Flame {
       return this.showingImg_num;
     }
   }
-  
 }
 
 public class FlameMgr {
