@@ -8,6 +8,4 @@ class Boss extends Enemy {
   void move() {
     this.x += 2;
   }
-
-
 }
