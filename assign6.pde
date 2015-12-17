@@ -31,7 +31,6 @@ int enemyCount = 8;
 int bulletCount = 5;
 Enemy[] enemys = new Enemy[enemyCount];
 Bullet [] bullets = new Bullet[bulletCount];
-Boss[] boss = new Boss[bulletCount];
 
 Fighter fighter;
 Background bg;
@@ -45,10 +44,8 @@ boolean isMovingLeft;
 boolean isMovingRight;
 
 int time;
-int wait = 4000;
+int wait =5200;
 int limit = 0;
-boolean isBoss = false;
-int counter = 0;
 
 void setup () {
   size(640, 480);
@@ -58,14 +55,11 @@ void setup () {
   treasure = new Treasure();
   hpDisplay = new HPDisplay();
   fighter = new Fighter(20);
-
   for (int i = 0; i < bulletCount; i++) {
     bullets[i] = null;
   }
-  for (int i = 0; i < bulletCount; i++) {
-    boss[i] = null;
-  }
 }
+
 
 void draw() {
 
@@ -81,25 +75,22 @@ void draw() {
     if (millis() - time >= wait) {
       addEnemy(currentType++);
       currentType = currentType % 4;
-    }		
+    }    
 
     for (int i = 0; i < enemyCount; ++i) {
       if (enemys[i] != null) {
         enemys[i].move();
         enemys[i].draw();
         if (enemys[i].isCollideWithFighter()) {
-          if ( currentType == EnemysShowingType.STRONGLINE) {
-            fighter.hpValueChange(-50);
-          } else {
-            fighter.hpValueChange(-20);
-          }
+          fighter.hpValueChange( - enemys[i].damage);
           flameMgr.addFlame(enemys[i].x, enemys[i].y);
-          enemys[i]=null;
+          enemys[i] = null;
         } else if (enemys[i].isOutOfBorder()) {
-          enemys[i]=null;
+          enemys[i] = null;
         }
       }
     }
+
     // 這地方應該加入Fighter 血量顯示UI
     hpDisplay.updateWithFighterHP(fighter.hp);
 
@@ -110,15 +101,9 @@ void draw() {
           bullets[j].move();
           if (bullets[j].isCollideWithEnemy(i)) {
             if (enemys[i]!= null) {
-              if (currentType == EnemysShowingType.STRONGLINE) {
-                counter += 1;
-                if (counter == 5) {
-                  flameMgr.addFlame(enemys[i].x, enemys[i].y);
-                  enemys[i] = null;
-                  bullets[j] = null;
-                  counter = 0;
-                }
-              } else {
+              enemys[i].life -= 1;
+              bullets[j] = null;
+              if (enemys[i].life == 0) {
                 flameMgr.addFlame(enemys[i].x, enemys[i].y);
                 enemys[i] = null;
                 bullets[j] = null;
@@ -134,6 +119,7 @@ void draw() {
     bg.draw();
   }
 }
+
 boolean isHit(int ax, int ay, int aw, int ah, int bx, int by, int bw, int bh)
 {
   // Collision x-axis?
@@ -184,8 +170,6 @@ void keyReleased() {
       fighter.shoot();
     }
   }
-
-
   if (key == ENTER) {
     switch(state) {
     case GameState.START:
