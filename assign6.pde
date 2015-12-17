@@ -44,7 +44,7 @@ boolean isMovingLeft;
 boolean isMovingRight;
 
 int time = 0;
-int wait =7000;
+int wait =5200;
 int limit = 0;
 
 void setup () {
@@ -117,6 +117,8 @@ void draw() {
     }
   } else if (state == GameState.END) {
     bg.draw();
+    currentType = EnemysShowingType.STRAIGHT;
+    time = 0;
   }
 }
 
