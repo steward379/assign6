@@ -1,11 +1,10 @@
 class Boss extends Enemy {
 
-  Boss(int x, int y) {
-    super (x, y, EnemysShowingType.STRONGLINE); 
+  Boss(int x, int y, int type) {
+    super (x, y, type); 
+    super.life = 5;
+    super.damage = 50;
+    super.speed = 2;
     super.enemyImg = loadImage("img/enemy2.png");
-  }
-
-  void move() {
-    this.x += 2;
   }
 }
