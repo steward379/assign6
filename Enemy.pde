@@ -42,6 +42,7 @@ class Enemy {
       return false;
     }
   }
+  
 }
 
 void addEnemy(int type)
