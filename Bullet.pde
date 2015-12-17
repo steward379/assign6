@@ -39,3 +39,4 @@ class Bullet {
       return false;
     }
   }
+}
