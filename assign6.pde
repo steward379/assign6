@@ -43,8 +43,8 @@ boolean isMovingDown;
 boolean isMovingLeft;
 boolean isMovingRight;
 
-int time;
-int wait =6000;
+int time = 0;
+int wait =7000;
 int limit = 0;
 
 void setup () {
@@ -72,7 +72,7 @@ void draw() {
     fighter.draw();
 
     //enemys
-    if (millis() - time >= wait) {
+    if (time == 0 || millis() - time >= wait) {
       addEnemy(currentType++);
       currentType = currentType % 4;
     }    
