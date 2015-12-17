@@ -2,18 +2,19 @@ class Enemy {
   int x = 0;
   int y = 0;
   int type;
-  int speed = 5;
+  int speed;
   PImage enemyImg;
-
+  int life;
+  int damage;
+  
   Enemy(int x, int y, int type) {
     this.x = x;
     this.y = y;
     this.type = type;
-    enemyImg = loadImage("img/enemy.png");
-  }
-
-  Enemy(String fileName) {
-    enemyImg = loadImage("img/" + fileName + ".png");
+    this.life = 1;
+    this.speed = 5;
+    this.damage = 20;
+    this.enemyImg = loadImage("img/enemy.png");
   }
 
   void move() {
@@ -42,11 +43,10 @@ class Enemy {
       return false;
     }
   }
-  
 }
 
 void addEnemy(int type)
-{	
+{  
   for (int i = 0; i < enemyCount; ++i) {
     enemys[i] = null;
   }
@@ -109,7 +109,6 @@ void addDiamondEnemy()
 void addEnemyStrong()
 {
   for (int i = 0; i < 5; ++i) {
-    enemys[i] = new Enemy(0, 40+ i * 85, FlightType.ENEMYSTRONG);
+     enemys[i] = new Boss(0, 40+ i * 85, FlightType.ENEMYSTRONG);
   }
-  isBoss = true;
 }
